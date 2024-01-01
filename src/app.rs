@@ -47,7 +47,7 @@ impl Random {
     }
 }
 
-/// Axis-Aligned Boundary Box (AABB) collision detector.
+/// Axis-Aligned Bounding Box (AABB) collision detector.
 fn is_player_touching_wall(player: PlayerPos, wall: WallPos) -> bool {
     ((wall.0..wall.0 + WALL_WIDTH).contains(&player.0)
         || (wall.0 + 1..wall.0 + WALL_WIDTH).contains(&(player.0 + PLAYER_WIDTH)))
@@ -156,14 +156,12 @@ pub fn App() -> impl IntoView {
 
     view! {
         <main
-            style:position="relative"
-            style:border="2px solid red"
+            class="app"
             style:width=format!("{}px", DUNGEON_WIDTH * SCALE)
             style:height=format!("{}px", DUNGEON_HEIGHT * SCALE)
 
             tabindex=0
             autofocus=true
-            style:outline="none"
             on:keypress=handle_keypress
         >
             <For

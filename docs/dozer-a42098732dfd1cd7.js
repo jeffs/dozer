@@ -577,7 +577,7 @@ async function __wbg_init(input) {
     if (wasm !== undefined) return wasm;
 
     if (typeof input === 'undefined') {
-        input = new URL('dozer-2d010d8d21869379_bg.wasm', import.meta.url);
+        input = new URL('dozer-a42098732dfd1cd7_bg.wasm', import.meta.url);
     }
     const imports = __wbg_get_imports();
 
