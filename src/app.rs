@@ -156,14 +156,12 @@ pub fn App() -> impl IntoView {
 
     view! {
         <main
-            style:position="relative"
-            style:border="2px solid red"
+            class="app"
             style:width=format!("{}px", DUNGEON_WIDTH * SCALE)
             style:height=format!("{}px", DUNGEON_HEIGHT * SCALE)
 
             tabindex=0
             autofocus=true
-            style:outline="none"
             on:keypress=handle_keypress
         >
             <For

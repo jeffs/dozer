@@ -11,9 +11,40 @@
   color: white;
 }
 
+.app {
+  /* The app's children are position absolutely with respect to their nearest positioned
+   * ancestor.  We want the app to be that ancestor, so we trivially position it.
+   */
+  position: relative;
+
+  /* Show the edges of the dungeon.  Entities can't move past this fence. */
+  border: 2px solid red;
+
+  /* We want the app to have focus so it can receive keyboard events; but we don't want
+   * the entire game to have an outline that could be mistaken for the border.
+   */
+  outline: none;
+}
+
 .entity {
   position: absolute;
-  transition: 0.16s linear;
-  
+
+  /* The animation may take longer than the time between key presses, in which case the
+   * entity will briefly (but frequently, if the user is button mashing) appear to be
+   * somewhere it's not.  There doesn't seem to be any workaround for this, except to
+   * throttle the rate at which new user input is accepted.
+   */
+  transition-duration: 160ms;
+
+  /* When the user holds down a key, we want the motion to be smooth, not jerky.  Any
+   * timing function other than linear causes the entity to repeatedly speed up and slow
+   * down on key repeat.
+   */
+  transition-timing-function: linear;
+
+  /* Because our entities are emoji, we can make them easier to see by setting a large
+   * font size.  This has no effect on gameplay, but the value shouldn't be wildly
+   * different from the bounding box defined in code.
+   */
   font-size: 20px;
 }
