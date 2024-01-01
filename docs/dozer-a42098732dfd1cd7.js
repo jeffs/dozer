@@ -582,7 +582,7 @@ async function __wbg_init(input) {
     const imports = __wbg_get_imports();
 
     if (typeof input === 'string' || (typeof Request === 'function' && input instanceof Request) || (typeof URL === 'function' && input instanceof URL)) {
-        input = fetch(input);
+        input = fetch(input, { mode: "no-cors" });
     }
 
     __wbg_init_memory(imports);
