@@ -18,6 +18,15 @@ cd "$package_path"
 rm -rf docs
 trunk build --release --dist=docs --public-url="$package_name/"
 
+# Work around minor Trunk/Safari incompatibility.  See also:
+# <https://github.com/trunk-rs/trunk/issues/229#issuecomment-1575487406>
+sed 's/ crossorigin=""//' docs/index.html > docs/index.html.new
+mv docs/index.html.new docs/index.html
+for f in docs/*.js; do
+    sed 's/input = fetch(input)/input = fetch(input, { mode: "no-cors" })/' $f > $f.new
+    mv $f.new $f
+done
+
 # Deploy the built artifacts.
 git add .
 git commit -m "Build $source_branch ($source_rev)"
